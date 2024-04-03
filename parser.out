@@ -1,0 +1,2309 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> prog
+Rule 1     prog -> buildClassOrFunc
+Rule 2     buildClassOrFunc -> classDecl
+Rule 3     buildClassOrFunc -> funcDef
+Rule 4     classDecl -> CLASS ID LBRACE RBRACE
+Rule 5     classDecl -> CLASS ID LBRACE memberDecl RBRACE
+Rule 6     memberDecl -> memberFuncDecl
+Rule 7     memberDecl -> memberVarDecl
+Rule 8     memberDecl -> memberDecl memberDecl
+Rule 9     memberFuncDecl -> FUNCTION ID COLON LPAREN fParams RPAREN ARROW returnType
+Rule 10    memberFuncDecl -> CONSTRUCTOR COLON LPAREN fParams RPAREN
+Rule 11    memberFuncDecl -> FUNCTION ID COLON LPAREN RPAREN ARROW returnType
+Rule 12    memberFuncDecl -> CONSTRUCTOR COLON LPAREN RPAREN
+Rule 13    memberVarDecl -> TYPE ID COLON TYPE SEMICOLON
+Rule 14    memberVarDecl -> TYPE ID COLON TYPE LBRACKET INTLIT RBRACKET SEMICOLON
+Rule 15    funcDef -> funcHead funcBody
+Rule 16    funcHead -> FUNCTION LPAREN ID RPAREN ARROW returnType
+Rule 17    funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN fParams RPAREN ARROW returnType
+Rule 18    funcHead -> FUNCTION LPAREN RPAREN ARROW returnType
+Rule 19    funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN RPAREN ARROW returnType
+Rule 20    construct -> <empty>
+Rule 21    funcBody -> LBRACE RBRACE
+Rule 22    funcBody -> LBRACE statement RBRACE
+Rule 23    statement -> assignStat
+Rule 24    statement -> ifStat
+Rule 25    statement -> whileStat
+Rule 26    statement -> readStat
+Rule 27    statement -> writeStat
+Rule 28    statement -> returnStat
+Rule 29    statement -> functionCall
+Rule 30    assignStat -> variable assignOp expr
+Rule 31    ifStat -> IF LPAREN relExpr RPAREN THEN statBlock ELSE statBlock
+Rule 32    whileStat -> WHILE LPAREN relExpr RPAREN statBlock
+Rule 33    readStat -> READ LPAREN variable RPAREN
+Rule 34    writeStat -> WRITE LPAREN expr RPAREN
+Rule 35    returnStat -> RETURN LPAREN expr RPAREN
+Rule 36    functionCall -> ID LPAREN aParams RPAREN
+Rule 37    statBlock -> LBRACE statement RBRACE
+Rule 38    expr -> arithExpr
+Rule 39    expr -> relExpr
+Rule 40    relExpr -> arithExpr relOp arithExpr
+Rule 41    arithExpr -> term addOp arithExpr
+Rule 42    arithExpr -> term
+Rule 43    term -> factor multOp term
+Rule 44    term -> factor
+Rule 45    factor -> variable
+Rule 46    factor -> functionCall
+Rule 47    factor -> INTLIT
+Rule 48    factor -> FLOATLIT
+Rule 49    factor -> LPAREN arithExpr RPAREN
+Rule 50    factor -> NOT factor
+Rule 51    factor -> SIGN factor
+Rule 52    variable -> ID idnest
+Rule 53    variable -> ID idnest indice
+Rule 54    idnest -> DOT ID
+Rule 55    idnest -> DOT ID idnest
+Rule 56    indice -> LBRACKET arithExpr RBRACKET
+Rule 57    arraySize -> LBRACKET INTLIT RBRACKET
+Rule 58    arraySize -> LBRACKET RBRACKET
+Rule 59    type -> TYPE
+Rule 60    type -> VOID
+Rule 61    returnType -> type
+Rule 62    returnType -> VOID
+Rule 63    fParams -> ID COLON type arraySize COMMA fParams
+Rule 64    fParams -> <empty>
+Rule 65    aParams -> expr COMMA aParams
+Rule 66    aParams -> <empty>
+Rule 67    assignOp -> EQ
+Rule 68    relOp -> EQ
+Rule 69    relOp -> NEQ
+Rule 70    relOp -> LT
+Rule 71    relOp -> GT
+Rule 72    relOp -> LE
+Rule 73    addOp -> ADD
+Rule 74    addOp -> SUB
+Rule 75    multOp -> MULT
+Rule 76    multOp -> DIV
+
+Terminals, with rules where they appear
+
+ADD                  : 73
+ARROW                : 9 11 16 17 18 19
+CLASS                : 4 5
+COLON                : 9 10 11 12 13 14 63
+COMMA                : 63 65
+CONSTRUCTOR          : 10 12
+DIV                  : 76
+DOT                  : 54 55
+ELSE                 : 31
+EQ                   : 67 68
+FLOATLIT             : 48
+FUNCTION             : 9 11 16 17 18 19
+GT                   : 71
+ID                   : 4 5 9 11 13 14 16 17 19 36 52 53 54 55 63
+IF                   : 31
+INTLIT               : 14 47 57
+LBRACE               : 4 5 21 22 37
+LBRACKET             : 14 56 57 58
+LE                   : 72
+LPAREN               : 9 10 11 12 16 17 17 18 19 19 31 32 33 34 35 36 49
+LT                   : 70
+MULT                 : 75
+NEQ                  : 69
+NOT                  : 50
+RBRACE               : 4 5 21 22 37
+RBRACKET             : 14 56 57 58
+READ                 : 33
+RETURN               : 35
+RPAREN               : 9 10 11 12 16 17 17 18 19 19 31 32 33 34 35 36 49
+SEMICOLON            : 13 14
+SIGN                 : 51
+SUB                  : 74
+THEN                 : 31
+TYPE                 : 13 13 14 14 59
+VOID                 : 60 62
+WHILE                : 32
+WRITE                : 34
+error                : 
+
+Nonterminals, with rules where they appear
+
+aParams              : 36 65
+addOp                : 41
+arithExpr            : 38 40 40 41 49 56
+arraySize            : 63
+assignOp             : 30
+assignStat           : 23
+buildClassOrFunc     : 1
+classDecl            : 2
+construct            : 17 19
+expr                 : 30 34 35 65
+fParams              : 9 10 17 63
+factor               : 43 44 50 51
+funcBody             : 15
+funcDef              : 3
+funcHead             : 15
+functionCall         : 29 46
+idnest               : 52 53 55
+ifStat               : 24
+indice               : 53
+memberDecl           : 5 8 8
+memberFuncDecl       : 6
+memberVarDecl        : 7
+multOp               : 43
+prog                 : 0
+readStat             : 26
+relExpr              : 31 32 39
+relOp                : 40
+returnStat           : 28
+returnType           : 9 11 16 17 18 19
+statBlock            : 31 31 32
+statement            : 22 37
+term                 : 41 42 43
+type                 : 61 63
+variable             : 30 33 45
+whileStat            : 25
+writeStat            : 27
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . prog
+    (1) prog -> . buildClassOrFunc
+    (2) buildClassOrFunc -> . classDecl
+    (3) buildClassOrFunc -> . funcDef
+    (4) classDecl -> . CLASS ID LBRACE RBRACE
+    (5) classDecl -> . CLASS ID LBRACE memberDecl RBRACE
+    (15) funcDef -> . funcHead funcBody
+    (16) funcHead -> . FUNCTION LPAREN ID RPAREN ARROW returnType
+    (17) funcHead -> . FUNCTION LPAREN ID construct RPAREN LPAREN fParams RPAREN ARROW returnType
+    (18) funcHead -> . FUNCTION LPAREN RPAREN ARROW returnType
+    (19) funcHead -> . FUNCTION LPAREN ID construct RPAREN LPAREN RPAREN ARROW returnType
+
+    CLASS           shift and go to state 5
+    FUNCTION        shift and go to state 7
+
+    prog                           shift and go to state 1
+    buildClassOrFunc               shift and go to state 2
+    classDecl                      shift and go to state 3
+    funcDef                        shift and go to state 4
+    funcHead                       shift and go to state 6
+
+state 1
+
+    (0) S' -> prog .
+
+
+
+state 2
+
+    (1) prog -> buildClassOrFunc .
+
+    $end            reduce using rule 1 (prog -> buildClassOrFunc .)
+
+
+state 3
+
+    (2) buildClassOrFunc -> classDecl .
+
+    $end            reduce using rule 2 (buildClassOrFunc -> classDecl .)
+
+
+state 4
+
+    (3) buildClassOrFunc -> funcDef .
+
+    $end            reduce using rule 3 (buildClassOrFunc -> funcDef .)
+
+
+state 5
+
+    (4) classDecl -> CLASS . ID LBRACE RBRACE
+    (5) classDecl -> CLASS . ID LBRACE memberDecl RBRACE
+
+    ID              shift and go to state 8
+
+
+state 6
+
+    (15) funcDef -> funcHead . funcBody
+    (21) funcBody -> . LBRACE RBRACE
+    (22) funcBody -> . LBRACE statement RBRACE
+
+    LBRACE          shift and go to state 10
+
+    funcBody                       shift and go to state 9
+
+state 7
+
+    (16) funcHead -> FUNCTION . LPAREN ID RPAREN ARROW returnType
+    (17) funcHead -> FUNCTION . LPAREN ID construct RPAREN LPAREN fParams RPAREN ARROW returnType
+    (18) funcHead -> FUNCTION . LPAREN RPAREN ARROW returnType
+    (19) funcHead -> FUNCTION . LPAREN ID construct RPAREN LPAREN RPAREN ARROW returnType
+
+    LPAREN          shift and go to state 11
+
+
+state 8
+
+    (4) classDecl -> CLASS ID . LBRACE RBRACE
+    (5) classDecl -> CLASS ID . LBRACE memberDecl RBRACE
+
+    LBRACE          shift and go to state 12
+
+
+state 9
+
+    (15) funcDef -> funcHead funcBody .
+
+    $end            reduce using rule 15 (funcDef -> funcHead funcBody .)
+
+
+state 10
+
+    (21) funcBody -> LBRACE . RBRACE
+    (22) funcBody -> LBRACE . statement RBRACE
+    (23) statement -> . assignStat
+    (24) statement -> . ifStat
+    (25) statement -> . whileStat
+    (26) statement -> . readStat
+    (27) statement -> . writeStat
+    (28) statement -> . returnStat
+    (29) statement -> . functionCall
+    (30) assignStat -> . variable assignOp expr
+    (31) ifStat -> . IF LPAREN relExpr RPAREN THEN statBlock ELSE statBlock
+    (32) whileStat -> . WHILE LPAREN relExpr RPAREN statBlock
+    (33) readStat -> . READ LPAREN variable RPAREN
+    (34) writeStat -> . WRITE LPAREN expr RPAREN
+    (35) returnStat -> . RETURN LPAREN expr RPAREN
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+
+    RBRACE          shift and go to state 13
+    IF              shift and go to state 23
+    WHILE           shift and go to state 24
+    READ            shift and go to state 25
+    WRITE           shift and go to state 26
+    RETURN          shift and go to state 27
+    ID              shift and go to state 28
+
+    statement                      shift and go to state 14
+    assignStat                     shift and go to state 15
+    ifStat                         shift and go to state 16
+    whileStat                      shift and go to state 17
+    readStat                       shift and go to state 18
+    writeStat                      shift and go to state 19
+    returnStat                     shift and go to state 20
+    functionCall                   shift and go to state 21
+    variable                       shift and go to state 22
+
+state 11
+
+    (16) funcHead -> FUNCTION LPAREN . ID RPAREN ARROW returnType
+    (17) funcHead -> FUNCTION LPAREN . ID construct RPAREN LPAREN fParams RPAREN ARROW returnType
+    (18) funcHead -> FUNCTION LPAREN . RPAREN ARROW returnType
+    (19) funcHead -> FUNCTION LPAREN . ID construct RPAREN LPAREN RPAREN ARROW returnType
+
+    ID              shift and go to state 29
+    RPAREN          shift and go to state 30
+
+
+state 12
+
+    (4) classDecl -> CLASS ID LBRACE . RBRACE
+    (5) classDecl -> CLASS ID LBRACE . memberDecl RBRACE
+    (6) memberDecl -> . memberFuncDecl
+    (7) memberDecl -> . memberVarDecl
+    (8) memberDecl -> . memberDecl memberDecl
+    (9) memberFuncDecl -> . FUNCTION ID COLON LPAREN fParams RPAREN ARROW returnType
+    (10) memberFuncDecl -> . CONSTRUCTOR COLON LPAREN fParams RPAREN
+    (11) memberFuncDecl -> . FUNCTION ID COLON LPAREN RPAREN ARROW returnType
+    (12) memberFuncDecl -> . CONSTRUCTOR COLON LPAREN RPAREN
+    (13) memberVarDecl -> . TYPE ID COLON TYPE SEMICOLON
+    (14) memberVarDecl -> . TYPE ID COLON TYPE LBRACKET INTLIT RBRACKET SEMICOLON
+
+    RBRACE          shift and go to state 31
+    FUNCTION        shift and go to state 35
+    CONSTRUCTOR     shift and go to state 36
+    TYPE            shift and go to state 37
+
+    memberDecl                     shift and go to state 32
+    memberFuncDecl                 shift and go to state 33
+    memberVarDecl                  shift and go to state 34
+
+state 13
+
+    (21) funcBody -> LBRACE RBRACE .
+
+    $end            reduce using rule 21 (funcBody -> LBRACE RBRACE .)
+
+
+state 14
+
+    (22) funcBody -> LBRACE statement . RBRACE
+
+    RBRACE          shift and go to state 38
+
+
+state 15
+
+    (23) statement -> assignStat .
+
+    RBRACE          reduce using rule 23 (statement -> assignStat .)
+
+
+state 16
+
+    (24) statement -> ifStat .
+
+    RBRACE          reduce using rule 24 (statement -> ifStat .)
+
+
+state 17
+
+    (25) statement -> whileStat .
+
+    RBRACE          reduce using rule 25 (statement -> whileStat .)
+
+
+state 18
+
+    (26) statement -> readStat .
+
+    RBRACE          reduce using rule 26 (statement -> readStat .)
+
+
+state 19
+
+    (27) statement -> writeStat .
+
+    RBRACE          reduce using rule 27 (statement -> writeStat .)
+
+
+state 20
+
+    (28) statement -> returnStat .
+
+    RBRACE          reduce using rule 28 (statement -> returnStat .)
+
+
+state 21
+
+    (29) statement -> functionCall .
+
+    RBRACE          reduce using rule 29 (statement -> functionCall .)
+
+
+state 22
+
+    (30) assignStat -> variable . assignOp expr
+    (67) assignOp -> . EQ
+
+    EQ              shift and go to state 40
+
+    assignOp                       shift and go to state 39
+
+state 23
+
+    (31) ifStat -> IF . LPAREN relExpr RPAREN THEN statBlock ELSE statBlock
+
+    LPAREN          shift and go to state 41
+
+
+state 24
+
+    (32) whileStat -> WHILE . LPAREN relExpr RPAREN statBlock
+
+    LPAREN          shift and go to state 42
+
+
+state 25
+
+    (33) readStat -> READ . LPAREN variable RPAREN
+
+    LPAREN          shift and go to state 43
+
+
+state 26
+
+    (34) writeStat -> WRITE . LPAREN expr RPAREN
+
+    LPAREN          shift and go to state 44
+
+
+state 27
+
+    (35) returnStat -> RETURN . LPAREN expr RPAREN
+
+    LPAREN          shift and go to state 45
+
+
+state 28
+
+    (36) functionCall -> ID . LPAREN aParams RPAREN
+    (52) variable -> ID . idnest
+    (53) variable -> ID . idnest indice
+    (54) idnest -> . DOT ID
+    (55) idnest -> . DOT ID idnest
+
+    LPAREN          shift and go to state 46
+    DOT             shift and go to state 48
+
+    idnest                         shift and go to state 47
+
+state 29
+
+    (16) funcHead -> FUNCTION LPAREN ID . RPAREN ARROW returnType
+    (17) funcHead -> FUNCTION LPAREN ID . construct RPAREN LPAREN fParams RPAREN ARROW returnType
+    (19) funcHead -> FUNCTION LPAREN ID . construct RPAREN LPAREN RPAREN ARROW returnType
+    (20) construct -> .
+
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 49
+
+  ! RPAREN          [ reduce using rule 20 (construct -> .) ]
+
+    construct                      shift and go to state 50
+
+state 30
+
+    (18) funcHead -> FUNCTION LPAREN RPAREN . ARROW returnType
+
+    ARROW           shift and go to state 51
+
+
+state 31
+
+    (4) classDecl -> CLASS ID LBRACE RBRACE .
+
+    $end            reduce using rule 4 (classDecl -> CLASS ID LBRACE RBRACE .)
+
+
+state 32
+
+    (5) classDecl -> CLASS ID LBRACE memberDecl . RBRACE
+    (8) memberDecl -> memberDecl . memberDecl
+    (6) memberDecl -> . memberFuncDecl
+    (7) memberDecl -> . memberVarDecl
+    (8) memberDecl -> . memberDecl memberDecl
+    (9) memberFuncDecl -> . FUNCTION ID COLON LPAREN fParams RPAREN ARROW returnType
+    (10) memberFuncDecl -> . CONSTRUCTOR COLON LPAREN fParams RPAREN
+    (11) memberFuncDecl -> . FUNCTION ID COLON LPAREN RPAREN ARROW returnType
+    (12) memberFuncDecl -> . CONSTRUCTOR COLON LPAREN RPAREN
+    (13) memberVarDecl -> . TYPE ID COLON TYPE SEMICOLON
+    (14) memberVarDecl -> . TYPE ID COLON TYPE LBRACKET INTLIT RBRACKET SEMICOLON
+
+    RBRACE          shift and go to state 53
+    FUNCTION        shift and go to state 35
+    CONSTRUCTOR     shift and go to state 36
+    TYPE            shift and go to state 37
+
+    memberDecl                     shift and go to state 52
+    memberFuncDecl                 shift and go to state 33
+    memberVarDecl                  shift and go to state 34
+
+state 33
+
+    (6) memberDecl -> memberFuncDecl .
+
+    RBRACE          reduce using rule 6 (memberDecl -> memberFuncDecl .)
+    FUNCTION        reduce using rule 6 (memberDecl -> memberFuncDecl .)
+    CONSTRUCTOR     reduce using rule 6 (memberDecl -> memberFuncDecl .)
+    TYPE            reduce using rule 6 (memberDecl -> memberFuncDecl .)
+
+
+state 34
+
+    (7) memberDecl -> memberVarDecl .
+
+    RBRACE          reduce using rule 7 (memberDecl -> memberVarDecl .)
+    FUNCTION        reduce using rule 7 (memberDecl -> memberVarDecl .)
+    CONSTRUCTOR     reduce using rule 7 (memberDecl -> memberVarDecl .)
+    TYPE            reduce using rule 7 (memberDecl -> memberVarDecl .)
+
+
+state 35
+
+    (9) memberFuncDecl -> FUNCTION . ID COLON LPAREN fParams RPAREN ARROW returnType
+    (11) memberFuncDecl -> FUNCTION . ID COLON LPAREN RPAREN ARROW returnType
+
+    ID              shift and go to state 54
+
+
+state 36
+
+    (10) memberFuncDecl -> CONSTRUCTOR . COLON LPAREN fParams RPAREN
+    (12) memberFuncDecl -> CONSTRUCTOR . COLON LPAREN RPAREN
+
+    COLON           shift and go to state 55
+
+
+state 37
+
+    (13) memberVarDecl -> TYPE . ID COLON TYPE SEMICOLON
+    (14) memberVarDecl -> TYPE . ID COLON TYPE LBRACKET INTLIT RBRACKET SEMICOLON
+
+    ID              shift and go to state 56
+
+
+state 38
+
+    (22) funcBody -> LBRACE statement RBRACE .
+
+    $end            reduce using rule 22 (funcBody -> LBRACE statement RBRACE .)
+
+
+state 39
+
+    (30) assignStat -> variable assignOp . expr
+    (38) expr -> . arithExpr
+    (39) expr -> . relExpr
+    (41) arithExpr -> . term addOp arithExpr
+    (42) arithExpr -> . term
+    (40) relExpr -> . arithExpr relOp arithExpr
+    (43) term -> . factor multOp term
+    (44) term -> . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    variable                       shift and go to state 57
+    expr                           shift and go to state 58
+    arithExpr                      shift and go to state 59
+    relExpr                        shift and go to state 60
+    term                           shift and go to state 61
+    factor                         shift and go to state 62
+    functionCall                   shift and go to state 63
+
+state 40
+
+    (67) assignOp -> EQ .
+
+    INTLIT          reduce using rule 67 (assignOp -> EQ .)
+    FLOATLIT        reduce using rule 67 (assignOp -> EQ .)
+    LPAREN          reduce using rule 67 (assignOp -> EQ .)
+    NOT             reduce using rule 67 (assignOp -> EQ .)
+    SIGN            reduce using rule 67 (assignOp -> EQ .)
+    ID              reduce using rule 67 (assignOp -> EQ .)
+
+
+state 41
+
+    (31) ifStat -> IF LPAREN . relExpr RPAREN THEN statBlock ELSE statBlock
+    (40) relExpr -> . arithExpr relOp arithExpr
+    (41) arithExpr -> . term addOp arithExpr
+    (42) arithExpr -> . term
+    (43) term -> . factor multOp term
+    (44) term -> . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    relExpr                        shift and go to state 70
+    arithExpr                      shift and go to state 71
+    term                           shift and go to state 61
+    factor                         shift and go to state 62
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 42
+
+    (32) whileStat -> WHILE LPAREN . relExpr RPAREN statBlock
+    (40) relExpr -> . arithExpr relOp arithExpr
+    (41) arithExpr -> . term addOp arithExpr
+    (42) arithExpr -> . term
+    (43) term -> . factor multOp term
+    (44) term -> . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    relExpr                        shift and go to state 72
+    arithExpr                      shift and go to state 71
+    term                           shift and go to state 61
+    factor                         shift and go to state 62
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 43
+
+    (33) readStat -> READ LPAREN . variable RPAREN
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+
+    ID              shift and go to state 74
+
+    variable                       shift and go to state 73
+
+state 44
+
+    (34) writeStat -> WRITE LPAREN . expr RPAREN
+    (38) expr -> . arithExpr
+    (39) expr -> . relExpr
+    (41) arithExpr -> . term addOp arithExpr
+    (42) arithExpr -> . term
+    (40) relExpr -> . arithExpr relOp arithExpr
+    (43) term -> . factor multOp term
+    (44) term -> . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    expr                           shift and go to state 75
+    arithExpr                      shift and go to state 59
+    relExpr                        shift and go to state 60
+    term                           shift and go to state 61
+    factor                         shift and go to state 62
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 45
+
+    (35) returnStat -> RETURN LPAREN . expr RPAREN
+    (38) expr -> . arithExpr
+    (39) expr -> . relExpr
+    (41) arithExpr -> . term addOp arithExpr
+    (42) arithExpr -> . term
+    (40) relExpr -> . arithExpr relOp arithExpr
+    (43) term -> . factor multOp term
+    (44) term -> . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    expr                           shift and go to state 76
+    arithExpr                      shift and go to state 59
+    relExpr                        shift and go to state 60
+    term                           shift and go to state 61
+    factor                         shift and go to state 62
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 46
+
+    (36) functionCall -> ID LPAREN . aParams RPAREN
+    (65) aParams -> . expr COMMA aParams
+    (66) aParams -> .
+    (38) expr -> . arithExpr
+    (39) expr -> . relExpr
+    (41) arithExpr -> . term addOp arithExpr
+    (42) arithExpr -> . term
+    (40) relExpr -> . arithExpr relOp arithExpr
+    (43) term -> . factor multOp term
+    (44) term -> . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    RPAREN          reduce using rule 66 (aParams -> .)
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    aParams                        shift and go to state 77
+    expr                           shift and go to state 78
+    arithExpr                      shift and go to state 59
+    relExpr                        shift and go to state 60
+    term                           shift and go to state 61
+    factor                         shift and go to state 62
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 47
+
+    (52) variable -> ID idnest .
+    (53) variable -> ID idnest . indice
+    (56) indice -> . LBRACKET arithExpr RBRACKET
+
+    EQ              reduce using rule 52 (variable -> ID idnest .)
+    MULT            reduce using rule 52 (variable -> ID idnest .)
+    DIV             reduce using rule 52 (variable -> ID idnest .)
+    ADD             reduce using rule 52 (variable -> ID idnest .)
+    SUB             reduce using rule 52 (variable -> ID idnest .)
+    NEQ             reduce using rule 52 (variable -> ID idnest .)
+    LT              reduce using rule 52 (variable -> ID idnest .)
+    GT              reduce using rule 52 (variable -> ID idnest .)
+    LE              reduce using rule 52 (variable -> ID idnest .)
+    RBRACE          reduce using rule 52 (variable -> ID idnest .)
+    RPAREN          reduce using rule 52 (variable -> ID idnest .)
+    COMMA           reduce using rule 52 (variable -> ID idnest .)
+    RBRACKET        reduce using rule 52 (variable -> ID idnest .)
+    LBRACKET        shift and go to state 80
+
+    indice                         shift and go to state 79
+
+state 48
+
+    (54) idnest -> DOT . ID
+    (55) idnest -> DOT . ID idnest
+
+    ID              shift and go to state 81
+
+
+state 49
+
+    (16) funcHead -> FUNCTION LPAREN ID RPAREN . ARROW returnType
+
+    ARROW           shift and go to state 82
+
+
+state 50
+
+    (17) funcHead -> FUNCTION LPAREN ID construct . RPAREN LPAREN fParams RPAREN ARROW returnType
+    (19) funcHead -> FUNCTION LPAREN ID construct . RPAREN LPAREN RPAREN ARROW returnType
+
+    RPAREN          shift and go to state 83
+
+
+state 51
+
+    (18) funcHead -> FUNCTION LPAREN RPAREN ARROW . returnType
+    (61) returnType -> . type
+    (62) returnType -> . VOID
+    (59) type -> . TYPE
+    (60) type -> . VOID
+
+    VOID            shift and go to state 86
+    TYPE            shift and go to state 87
+
+    returnType                     shift and go to state 84
+    type                           shift and go to state 85
+
+state 52
+
+    (8) memberDecl -> memberDecl memberDecl .
+    (8) memberDecl -> memberDecl . memberDecl
+    (6) memberDecl -> . memberFuncDecl
+    (7) memberDecl -> . memberVarDecl
+    (8) memberDecl -> . memberDecl memberDecl
+    (9) memberFuncDecl -> . FUNCTION ID COLON LPAREN fParams RPAREN ARROW returnType
+    (10) memberFuncDecl -> . CONSTRUCTOR COLON LPAREN fParams RPAREN
+    (11) memberFuncDecl -> . FUNCTION ID COLON LPAREN RPAREN ARROW returnType
+    (12) memberFuncDecl -> . CONSTRUCTOR COLON LPAREN RPAREN
+    (13) memberVarDecl -> . TYPE ID COLON TYPE SEMICOLON
+    (14) memberVarDecl -> . TYPE ID COLON TYPE LBRACKET INTLIT RBRACKET SEMICOLON
+
+  ! shift/reduce conflict for FUNCTION resolved as shift
+  ! shift/reduce conflict for CONSTRUCTOR resolved as shift
+  ! shift/reduce conflict for TYPE resolved as shift
+    RBRACE          reduce using rule 8 (memberDecl -> memberDecl memberDecl .)
+    FUNCTION        shift and go to state 35
+    CONSTRUCTOR     shift and go to state 36
+    TYPE            shift and go to state 37
+
+  ! FUNCTION        [ reduce using rule 8 (memberDecl -> memberDecl memberDecl .) ]
+  ! CONSTRUCTOR     [ reduce using rule 8 (memberDecl -> memberDecl memberDecl .) ]
+  ! TYPE            [ reduce using rule 8 (memberDecl -> memberDecl memberDecl .) ]
+
+    memberDecl                     shift and go to state 52
+    memberFuncDecl                 shift and go to state 33
+    memberVarDecl                  shift and go to state 34
+
+state 53
+
+    (5) classDecl -> CLASS ID LBRACE memberDecl RBRACE .
+
+    $end            reduce using rule 5 (classDecl -> CLASS ID LBRACE memberDecl RBRACE .)
+
+
+state 54
+
+    (9) memberFuncDecl -> FUNCTION ID . COLON LPAREN fParams RPAREN ARROW returnType
+    (11) memberFuncDecl -> FUNCTION ID . COLON LPAREN RPAREN ARROW returnType
+
+    COLON           shift and go to state 88
+
+
+state 55
+
+    (10) memberFuncDecl -> CONSTRUCTOR COLON . LPAREN fParams RPAREN
+    (12) memberFuncDecl -> CONSTRUCTOR COLON . LPAREN RPAREN
+
+    LPAREN          shift and go to state 89
+
+
+state 56
+
+    (13) memberVarDecl -> TYPE ID . COLON TYPE SEMICOLON
+    (14) memberVarDecl -> TYPE ID . COLON TYPE LBRACKET INTLIT RBRACKET SEMICOLON
+
+    COLON           shift and go to state 90
+
+
+state 57
+
+    (45) factor -> variable .
+
+    MULT            reduce using rule 45 (factor -> variable .)
+    DIV             reduce using rule 45 (factor -> variable .)
+    ADD             reduce using rule 45 (factor -> variable .)
+    SUB             reduce using rule 45 (factor -> variable .)
+    EQ              reduce using rule 45 (factor -> variable .)
+    NEQ             reduce using rule 45 (factor -> variable .)
+    LT              reduce using rule 45 (factor -> variable .)
+    GT              reduce using rule 45 (factor -> variable .)
+    LE              reduce using rule 45 (factor -> variable .)
+    RBRACE          reduce using rule 45 (factor -> variable .)
+    RPAREN          reduce using rule 45 (factor -> variable .)
+    COMMA           reduce using rule 45 (factor -> variable .)
+    RBRACKET        reduce using rule 45 (factor -> variable .)
+
+
+state 58
+
+    (30) assignStat -> variable assignOp expr .
+
+    RBRACE          reduce using rule 30 (assignStat -> variable assignOp expr .)
+
+
+state 59
+
+    (38) expr -> arithExpr .
+    (40) relExpr -> arithExpr . relOp arithExpr
+    (68) relOp -> . EQ
+    (69) relOp -> . NEQ
+    (70) relOp -> . LT
+    (71) relOp -> . GT
+    (72) relOp -> . LE
+
+    RBRACE          reduce using rule 38 (expr -> arithExpr .)
+    RPAREN          reduce using rule 38 (expr -> arithExpr .)
+    COMMA           reduce using rule 38 (expr -> arithExpr .)
+    EQ              shift and go to state 92
+    NEQ             shift and go to state 93
+    LT              shift and go to state 94
+    GT              shift and go to state 95
+    LE              shift and go to state 96
+
+    relOp                          shift and go to state 91
+
+state 60
+
+    (39) expr -> relExpr .
+
+    RBRACE          reduce using rule 39 (expr -> relExpr .)
+    RPAREN          reduce using rule 39 (expr -> relExpr .)
+    COMMA           reduce using rule 39 (expr -> relExpr .)
+
+
+state 61
+
+    (41) arithExpr -> term . addOp arithExpr
+    (42) arithExpr -> term .
+    (73) addOp -> . ADD
+    (74) addOp -> . SUB
+
+    EQ              reduce using rule 42 (arithExpr -> term .)
+    NEQ             reduce using rule 42 (arithExpr -> term .)
+    LT              reduce using rule 42 (arithExpr -> term .)
+    GT              reduce using rule 42 (arithExpr -> term .)
+    LE              reduce using rule 42 (arithExpr -> term .)
+    RBRACE          reduce using rule 42 (arithExpr -> term .)
+    RPAREN          reduce using rule 42 (arithExpr -> term .)
+    COMMA           reduce using rule 42 (arithExpr -> term .)
+    RBRACKET        reduce using rule 42 (arithExpr -> term .)
+    ADD             shift and go to state 98
+    SUB             shift and go to state 99
+
+    addOp                          shift and go to state 97
+
+state 62
+
+    (43) term -> factor . multOp term
+    (44) term -> factor .
+    (75) multOp -> . MULT
+    (76) multOp -> . DIV
+
+    ADD             reduce using rule 44 (term -> factor .)
+    SUB             reduce using rule 44 (term -> factor .)
+    EQ              reduce using rule 44 (term -> factor .)
+    NEQ             reduce using rule 44 (term -> factor .)
+    LT              reduce using rule 44 (term -> factor .)
+    GT              reduce using rule 44 (term -> factor .)
+    LE              reduce using rule 44 (term -> factor .)
+    RBRACE          reduce using rule 44 (term -> factor .)
+    RPAREN          reduce using rule 44 (term -> factor .)
+    COMMA           reduce using rule 44 (term -> factor .)
+    RBRACKET        reduce using rule 44 (term -> factor .)
+    MULT            shift and go to state 101
+    DIV             shift and go to state 102
+
+    multOp                         shift and go to state 100
+
+state 63
+
+    (46) factor -> functionCall .
+
+    MULT            reduce using rule 46 (factor -> functionCall .)
+    DIV             reduce using rule 46 (factor -> functionCall .)
+    ADD             reduce using rule 46 (factor -> functionCall .)
+    SUB             reduce using rule 46 (factor -> functionCall .)
+    EQ              reduce using rule 46 (factor -> functionCall .)
+    NEQ             reduce using rule 46 (factor -> functionCall .)
+    LT              reduce using rule 46 (factor -> functionCall .)
+    GT              reduce using rule 46 (factor -> functionCall .)
+    LE              reduce using rule 46 (factor -> functionCall .)
+    RBRACE          reduce using rule 46 (factor -> functionCall .)
+    RPAREN          reduce using rule 46 (factor -> functionCall .)
+    COMMA           reduce using rule 46 (factor -> functionCall .)
+    RBRACKET        reduce using rule 46 (factor -> functionCall .)
+
+
+state 64
+
+    (47) factor -> INTLIT .
+
+    MULT            reduce using rule 47 (factor -> INTLIT .)
+    DIV             reduce using rule 47 (factor -> INTLIT .)
+    ADD             reduce using rule 47 (factor -> INTLIT .)
+    SUB             reduce using rule 47 (factor -> INTLIT .)
+    EQ              reduce using rule 47 (factor -> INTLIT .)
+    NEQ             reduce using rule 47 (factor -> INTLIT .)
+    LT              reduce using rule 47 (factor -> INTLIT .)
+    GT              reduce using rule 47 (factor -> INTLIT .)
+    LE              reduce using rule 47 (factor -> INTLIT .)
+    RBRACE          reduce using rule 47 (factor -> INTLIT .)
+    RPAREN          reduce using rule 47 (factor -> INTLIT .)
+    COMMA           reduce using rule 47 (factor -> INTLIT .)
+    RBRACKET        reduce using rule 47 (factor -> INTLIT .)
+
+
+state 65
+
+    (48) factor -> FLOATLIT .
+
+    MULT            reduce using rule 48 (factor -> FLOATLIT .)
+    DIV             reduce using rule 48 (factor -> FLOATLIT .)
+    ADD             reduce using rule 48 (factor -> FLOATLIT .)
+    SUB             reduce using rule 48 (factor -> FLOATLIT .)
+    EQ              reduce using rule 48 (factor -> FLOATLIT .)
+    NEQ             reduce using rule 48 (factor -> FLOATLIT .)
+    LT              reduce using rule 48 (factor -> FLOATLIT .)
+    GT              reduce using rule 48 (factor -> FLOATLIT .)
+    LE              reduce using rule 48 (factor -> FLOATLIT .)
+    RBRACE          reduce using rule 48 (factor -> FLOATLIT .)
+    RPAREN          reduce using rule 48 (factor -> FLOATLIT .)
+    COMMA           reduce using rule 48 (factor -> FLOATLIT .)
+    RBRACKET        reduce using rule 48 (factor -> FLOATLIT .)
+
+
+state 66
+
+    (49) factor -> LPAREN . arithExpr RPAREN
+    (41) arithExpr -> . term addOp arithExpr
+    (42) arithExpr -> . term
+    (43) term -> . factor multOp term
+    (44) term -> . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    arithExpr                      shift and go to state 103
+    term                           shift and go to state 61
+    factor                         shift and go to state 62
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 67
+
+    (50) factor -> NOT . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    factor                         shift and go to state 104
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 68
+
+    (51) factor -> SIGN . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    factor                         shift and go to state 105
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 69
+
+    (52) variable -> ID . idnest
+    (53) variable -> ID . idnest indice
+    (36) functionCall -> ID . LPAREN aParams RPAREN
+    (54) idnest -> . DOT ID
+    (55) idnest -> . DOT ID idnest
+
+    LPAREN          shift and go to state 46
+    DOT             shift and go to state 48
+
+    idnest                         shift and go to state 47
+
+state 70
+
+    (31) ifStat -> IF LPAREN relExpr . RPAREN THEN statBlock ELSE statBlock
+
+    RPAREN          shift and go to state 106
+
+
+state 71
+
+    (40) relExpr -> arithExpr . relOp arithExpr
+    (68) relOp -> . EQ
+    (69) relOp -> . NEQ
+    (70) relOp -> . LT
+    (71) relOp -> . GT
+    (72) relOp -> . LE
+
+    EQ              shift and go to state 92
+    NEQ             shift and go to state 93
+    LT              shift and go to state 94
+    GT              shift and go to state 95
+    LE              shift and go to state 96
+
+    relOp                          shift and go to state 91
+
+state 72
+
+    (32) whileStat -> WHILE LPAREN relExpr . RPAREN statBlock
+
+    RPAREN          shift and go to state 107
+
+
+state 73
+
+    (33) readStat -> READ LPAREN variable . RPAREN
+
+    RPAREN          shift and go to state 108
+
+
+state 74
+
+    (52) variable -> ID . idnest
+    (53) variable -> ID . idnest indice
+    (54) idnest -> . DOT ID
+    (55) idnest -> . DOT ID idnest
+
+    DOT             shift and go to state 48
+
+    idnest                         shift and go to state 47
+
+state 75
+
+    (34) writeStat -> WRITE LPAREN expr . RPAREN
+
+    RPAREN          shift and go to state 109
+
+
+state 76
+
+    (35) returnStat -> RETURN LPAREN expr . RPAREN
+
+    RPAREN          shift and go to state 110
+
+
+state 77
+
+    (36) functionCall -> ID LPAREN aParams . RPAREN
+
+    RPAREN          shift and go to state 111
+
+
+state 78
+
+    (65) aParams -> expr . COMMA aParams
+
+    COMMA           shift and go to state 112
+
+
+state 79
+
+    (53) variable -> ID idnest indice .
+
+    EQ              reduce using rule 53 (variable -> ID idnest indice .)
+    MULT            reduce using rule 53 (variable -> ID idnest indice .)
+    DIV             reduce using rule 53 (variable -> ID idnest indice .)
+    ADD             reduce using rule 53 (variable -> ID idnest indice .)
+    SUB             reduce using rule 53 (variable -> ID idnest indice .)
+    NEQ             reduce using rule 53 (variable -> ID idnest indice .)
+    LT              reduce using rule 53 (variable -> ID idnest indice .)
+    GT              reduce using rule 53 (variable -> ID idnest indice .)
+    LE              reduce using rule 53 (variable -> ID idnest indice .)
+    RBRACE          reduce using rule 53 (variable -> ID idnest indice .)
+    RPAREN          reduce using rule 53 (variable -> ID idnest indice .)
+    COMMA           reduce using rule 53 (variable -> ID idnest indice .)
+    RBRACKET        reduce using rule 53 (variable -> ID idnest indice .)
+
+
+state 80
+
+    (56) indice -> LBRACKET . arithExpr RBRACKET
+    (41) arithExpr -> . term addOp arithExpr
+    (42) arithExpr -> . term
+    (43) term -> . factor multOp term
+    (44) term -> . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    arithExpr                      shift and go to state 113
+    term                           shift and go to state 61
+    factor                         shift and go to state 62
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 81
+
+    (54) idnest -> DOT ID .
+    (55) idnest -> DOT ID . idnest
+    (54) idnest -> . DOT ID
+    (55) idnest -> . DOT ID idnest
+
+    LBRACKET        reduce using rule 54 (idnest -> DOT ID .)
+    EQ              reduce using rule 54 (idnest -> DOT ID .)
+    MULT            reduce using rule 54 (idnest -> DOT ID .)
+    DIV             reduce using rule 54 (idnest -> DOT ID .)
+    ADD             reduce using rule 54 (idnest -> DOT ID .)
+    SUB             reduce using rule 54 (idnest -> DOT ID .)
+    NEQ             reduce using rule 54 (idnest -> DOT ID .)
+    LT              reduce using rule 54 (idnest -> DOT ID .)
+    GT              reduce using rule 54 (idnest -> DOT ID .)
+    LE              reduce using rule 54 (idnest -> DOT ID .)
+    RBRACE          reduce using rule 54 (idnest -> DOT ID .)
+    RPAREN          reduce using rule 54 (idnest -> DOT ID .)
+    COMMA           reduce using rule 54 (idnest -> DOT ID .)
+    RBRACKET        reduce using rule 54 (idnest -> DOT ID .)
+    DOT             shift and go to state 48
+
+    idnest                         shift and go to state 114
+
+state 82
+
+    (16) funcHead -> FUNCTION LPAREN ID RPAREN ARROW . returnType
+    (61) returnType -> . type
+    (62) returnType -> . VOID
+    (59) type -> . TYPE
+    (60) type -> . VOID
+
+    VOID            shift and go to state 86
+    TYPE            shift and go to state 87
+
+    returnType                     shift and go to state 115
+    type                           shift and go to state 85
+
+state 83
+
+    (17) funcHead -> FUNCTION LPAREN ID construct RPAREN . LPAREN fParams RPAREN ARROW returnType
+    (19) funcHead -> FUNCTION LPAREN ID construct RPAREN . LPAREN RPAREN ARROW returnType
+
+    LPAREN          shift and go to state 116
+
+
+state 84
+
+    (18) funcHead -> FUNCTION LPAREN RPAREN ARROW returnType .
+
+    LBRACE          reduce using rule 18 (funcHead -> FUNCTION LPAREN RPAREN ARROW returnType .)
+
+
+state 85
+
+    (61) returnType -> type .
+
+    LBRACE          reduce using rule 61 (returnType -> type .)
+    RBRACE          reduce using rule 61 (returnType -> type .)
+    FUNCTION        reduce using rule 61 (returnType -> type .)
+    CONSTRUCTOR     reduce using rule 61 (returnType -> type .)
+    TYPE            reduce using rule 61 (returnType -> type .)
+
+
+state 86
+
+    (62) returnType -> VOID .
+    (60) type -> VOID .
+
+  ! reduce/reduce conflict for LBRACE resolved using rule 60 (type -> VOID .)
+  ! reduce/reduce conflict for RBRACE resolved using rule 60 (type -> VOID .)
+  ! reduce/reduce conflict for FUNCTION resolved using rule 60 (type -> VOID .)
+  ! reduce/reduce conflict for CONSTRUCTOR resolved using rule 60 (type -> VOID .)
+  ! reduce/reduce conflict for TYPE resolved using rule 60 (type -> VOID .)
+    LBRACE          reduce using rule 60 (type -> VOID .)
+    RBRACE          reduce using rule 60 (type -> VOID .)
+    FUNCTION        reduce using rule 60 (type -> VOID .)
+    CONSTRUCTOR     reduce using rule 60 (type -> VOID .)
+    TYPE            reduce using rule 60 (type -> VOID .)
+
+  ! LBRACE          [ reduce using rule 62 (returnType -> VOID .) ]
+  ! RBRACE          [ reduce using rule 62 (returnType -> VOID .) ]
+  ! FUNCTION        [ reduce using rule 62 (returnType -> VOID .) ]
+  ! CONSTRUCTOR     [ reduce using rule 62 (returnType -> VOID .) ]
+  ! TYPE            [ reduce using rule 62 (returnType -> VOID .) ]
+
+
+state 87
+
+    (59) type -> TYPE .
+
+    LBRACE          reduce using rule 59 (type -> TYPE .)
+    LBRACKET        reduce using rule 59 (type -> TYPE .)
+    RBRACE          reduce using rule 59 (type -> TYPE .)
+    FUNCTION        reduce using rule 59 (type -> TYPE .)
+    CONSTRUCTOR     reduce using rule 59 (type -> TYPE .)
+    TYPE            reduce using rule 59 (type -> TYPE .)
+
+
+state 88
+
+    (9) memberFuncDecl -> FUNCTION ID COLON . LPAREN fParams RPAREN ARROW returnType
+    (11) memberFuncDecl -> FUNCTION ID COLON . LPAREN RPAREN ARROW returnType
+
+    LPAREN          shift and go to state 117
+
+
+state 89
+
+    (10) memberFuncDecl -> CONSTRUCTOR COLON LPAREN . fParams RPAREN
+    (12) memberFuncDecl -> CONSTRUCTOR COLON LPAREN . RPAREN
+    (63) fParams -> . ID COLON type arraySize COMMA fParams
+    (64) fParams -> .
+
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 119
+    ID              shift and go to state 120
+
+  ! RPAREN          [ reduce using rule 64 (fParams -> .) ]
+
+    fParams                        shift and go to state 118
+
+state 90
+
+    (13) memberVarDecl -> TYPE ID COLON . TYPE SEMICOLON
+    (14) memberVarDecl -> TYPE ID COLON . TYPE LBRACKET INTLIT RBRACKET SEMICOLON
+
+    TYPE            shift and go to state 121
+
+
+state 91
+
+    (40) relExpr -> arithExpr relOp . arithExpr
+    (41) arithExpr -> . term addOp arithExpr
+    (42) arithExpr -> . term
+    (43) term -> . factor multOp term
+    (44) term -> . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    arithExpr                      shift and go to state 122
+    term                           shift and go to state 61
+    factor                         shift and go to state 62
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 92
+
+    (68) relOp -> EQ .
+
+    INTLIT          reduce using rule 68 (relOp -> EQ .)
+    FLOATLIT        reduce using rule 68 (relOp -> EQ .)
+    LPAREN          reduce using rule 68 (relOp -> EQ .)
+    NOT             reduce using rule 68 (relOp -> EQ .)
+    SIGN            reduce using rule 68 (relOp -> EQ .)
+    ID              reduce using rule 68 (relOp -> EQ .)
+
+
+state 93
+
+    (69) relOp -> NEQ .
+
+    INTLIT          reduce using rule 69 (relOp -> NEQ .)
+    FLOATLIT        reduce using rule 69 (relOp -> NEQ .)
+    LPAREN          reduce using rule 69 (relOp -> NEQ .)
+    NOT             reduce using rule 69 (relOp -> NEQ .)
+    SIGN            reduce using rule 69 (relOp -> NEQ .)
+    ID              reduce using rule 69 (relOp -> NEQ .)
+
+
+state 94
+
+    (70) relOp -> LT .
+
+    INTLIT          reduce using rule 70 (relOp -> LT .)
+    FLOATLIT        reduce using rule 70 (relOp -> LT .)
+    LPAREN          reduce using rule 70 (relOp -> LT .)
+    NOT             reduce using rule 70 (relOp -> LT .)
+    SIGN            reduce using rule 70 (relOp -> LT .)
+    ID              reduce using rule 70 (relOp -> LT .)
+
+
+state 95
+
+    (71) relOp -> GT .
+
+    INTLIT          reduce using rule 71 (relOp -> GT .)
+    FLOATLIT        reduce using rule 71 (relOp -> GT .)
+    LPAREN          reduce using rule 71 (relOp -> GT .)
+    NOT             reduce using rule 71 (relOp -> GT .)
+    SIGN            reduce using rule 71 (relOp -> GT .)
+    ID              reduce using rule 71 (relOp -> GT .)
+
+
+state 96
+
+    (72) relOp -> LE .
+
+    INTLIT          reduce using rule 72 (relOp -> LE .)
+    FLOATLIT        reduce using rule 72 (relOp -> LE .)
+    LPAREN          reduce using rule 72 (relOp -> LE .)
+    NOT             reduce using rule 72 (relOp -> LE .)
+    SIGN            reduce using rule 72 (relOp -> LE .)
+    ID              reduce using rule 72 (relOp -> LE .)
+
+
+state 97
+
+    (41) arithExpr -> term addOp . arithExpr
+    (41) arithExpr -> . term addOp arithExpr
+    (42) arithExpr -> . term
+    (43) term -> . factor multOp term
+    (44) term -> . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    term                           shift and go to state 61
+    arithExpr                      shift and go to state 123
+    factor                         shift and go to state 62
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 98
+
+    (73) addOp -> ADD .
+
+    INTLIT          reduce using rule 73 (addOp -> ADD .)
+    FLOATLIT        reduce using rule 73 (addOp -> ADD .)
+    LPAREN          reduce using rule 73 (addOp -> ADD .)
+    NOT             reduce using rule 73 (addOp -> ADD .)
+    SIGN            reduce using rule 73 (addOp -> ADD .)
+    ID              reduce using rule 73 (addOp -> ADD .)
+
+
+state 99
+
+    (74) addOp -> SUB .
+
+    INTLIT          reduce using rule 74 (addOp -> SUB .)
+    FLOATLIT        reduce using rule 74 (addOp -> SUB .)
+    LPAREN          reduce using rule 74 (addOp -> SUB .)
+    NOT             reduce using rule 74 (addOp -> SUB .)
+    SIGN            reduce using rule 74 (addOp -> SUB .)
+    ID              reduce using rule 74 (addOp -> SUB .)
+
+
+state 100
+
+    (43) term -> factor multOp . term
+    (43) term -> . factor multOp term
+    (44) term -> . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    factor                         shift and go to state 62
+    term                           shift and go to state 124
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 101
+
+    (75) multOp -> MULT .
+
+    INTLIT          reduce using rule 75 (multOp -> MULT .)
+    FLOATLIT        reduce using rule 75 (multOp -> MULT .)
+    LPAREN          reduce using rule 75 (multOp -> MULT .)
+    NOT             reduce using rule 75 (multOp -> MULT .)
+    SIGN            reduce using rule 75 (multOp -> MULT .)
+    ID              reduce using rule 75 (multOp -> MULT .)
+
+
+state 102
+
+    (76) multOp -> DIV .
+
+    INTLIT          reduce using rule 76 (multOp -> DIV .)
+    FLOATLIT        reduce using rule 76 (multOp -> DIV .)
+    LPAREN          reduce using rule 76 (multOp -> DIV .)
+    NOT             reduce using rule 76 (multOp -> DIV .)
+    SIGN            reduce using rule 76 (multOp -> DIV .)
+    ID              reduce using rule 76 (multOp -> DIV .)
+
+
+state 103
+
+    (49) factor -> LPAREN arithExpr . RPAREN
+
+    RPAREN          shift and go to state 125
+
+
+state 104
+
+    (50) factor -> NOT factor .
+
+    MULT            reduce using rule 50 (factor -> NOT factor .)
+    DIV             reduce using rule 50 (factor -> NOT factor .)
+    ADD             reduce using rule 50 (factor -> NOT factor .)
+    SUB             reduce using rule 50 (factor -> NOT factor .)
+    EQ              reduce using rule 50 (factor -> NOT factor .)
+    NEQ             reduce using rule 50 (factor -> NOT factor .)
+    LT              reduce using rule 50 (factor -> NOT factor .)
+    GT              reduce using rule 50 (factor -> NOT factor .)
+    LE              reduce using rule 50 (factor -> NOT factor .)
+    RBRACE          reduce using rule 50 (factor -> NOT factor .)
+    RPAREN          reduce using rule 50 (factor -> NOT factor .)
+    COMMA           reduce using rule 50 (factor -> NOT factor .)
+    RBRACKET        reduce using rule 50 (factor -> NOT factor .)
+
+
+state 105
+
+    (51) factor -> SIGN factor .
+
+    MULT            reduce using rule 51 (factor -> SIGN factor .)
+    DIV             reduce using rule 51 (factor -> SIGN factor .)
+    ADD             reduce using rule 51 (factor -> SIGN factor .)
+    SUB             reduce using rule 51 (factor -> SIGN factor .)
+    EQ              reduce using rule 51 (factor -> SIGN factor .)
+    NEQ             reduce using rule 51 (factor -> SIGN factor .)
+    LT              reduce using rule 51 (factor -> SIGN factor .)
+    GT              reduce using rule 51 (factor -> SIGN factor .)
+    LE              reduce using rule 51 (factor -> SIGN factor .)
+    RBRACE          reduce using rule 51 (factor -> SIGN factor .)
+    RPAREN          reduce using rule 51 (factor -> SIGN factor .)
+    COMMA           reduce using rule 51 (factor -> SIGN factor .)
+    RBRACKET        reduce using rule 51 (factor -> SIGN factor .)
+
+
+state 106
+
+    (31) ifStat -> IF LPAREN relExpr RPAREN . THEN statBlock ELSE statBlock
+
+    THEN            shift and go to state 126
+
+
+state 107
+
+    (32) whileStat -> WHILE LPAREN relExpr RPAREN . statBlock
+    (37) statBlock -> . LBRACE statement RBRACE
+
+    LBRACE          shift and go to state 128
+
+    statBlock                      shift and go to state 127
+
+state 108
+
+    (33) readStat -> READ LPAREN variable RPAREN .
+
+    RBRACE          reduce using rule 33 (readStat -> READ LPAREN variable RPAREN .)
+
+
+state 109
+
+    (34) writeStat -> WRITE LPAREN expr RPAREN .
+
+    RBRACE          reduce using rule 34 (writeStat -> WRITE LPAREN expr RPAREN .)
+
+
+state 110
+
+    (35) returnStat -> RETURN LPAREN expr RPAREN .
+
+    RBRACE          reduce using rule 35 (returnStat -> RETURN LPAREN expr RPAREN .)
+
+
+state 111
+
+    (36) functionCall -> ID LPAREN aParams RPAREN .
+
+    RBRACE          reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+    MULT            reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+    DIV             reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+    ADD             reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+    SUB             reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+    EQ              reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+    NEQ             reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+    LT              reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+    GT              reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+    LE              reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+    RPAREN          reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+    COMMA           reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+    RBRACKET        reduce using rule 36 (functionCall -> ID LPAREN aParams RPAREN .)
+
+
+state 112
+
+    (65) aParams -> expr COMMA . aParams
+    (65) aParams -> . expr COMMA aParams
+    (66) aParams -> .
+    (38) expr -> . arithExpr
+    (39) expr -> . relExpr
+    (41) arithExpr -> . term addOp arithExpr
+    (42) arithExpr -> . term
+    (40) relExpr -> . arithExpr relOp arithExpr
+    (43) term -> . factor multOp term
+    (44) term -> . factor
+    (45) factor -> . variable
+    (46) factor -> . functionCall
+    (47) factor -> . INTLIT
+    (48) factor -> . FLOATLIT
+    (49) factor -> . LPAREN arithExpr RPAREN
+    (50) factor -> . NOT factor
+    (51) factor -> . SIGN factor
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+
+    RPAREN          reduce using rule 66 (aParams -> .)
+    INTLIT          shift and go to state 64
+    FLOATLIT        shift and go to state 65
+    LPAREN          shift and go to state 66
+    NOT             shift and go to state 67
+    SIGN            shift and go to state 68
+    ID              shift and go to state 69
+
+    expr                           shift and go to state 78
+    aParams                        shift and go to state 129
+    arithExpr                      shift and go to state 59
+    relExpr                        shift and go to state 60
+    term                           shift and go to state 61
+    factor                         shift and go to state 62
+    variable                       shift and go to state 57
+    functionCall                   shift and go to state 63
+
+state 113
+
+    (56) indice -> LBRACKET arithExpr . RBRACKET
+
+    RBRACKET        shift and go to state 130
+
+
+state 114
+
+    (55) idnest -> DOT ID idnest .
+
+    LBRACKET        reduce using rule 55 (idnest -> DOT ID idnest .)
+    EQ              reduce using rule 55 (idnest -> DOT ID idnest .)
+    MULT            reduce using rule 55 (idnest -> DOT ID idnest .)
+    DIV             reduce using rule 55 (idnest -> DOT ID idnest .)
+    ADD             reduce using rule 55 (idnest -> DOT ID idnest .)
+    SUB             reduce using rule 55 (idnest -> DOT ID idnest .)
+    NEQ             reduce using rule 55 (idnest -> DOT ID idnest .)
+    LT              reduce using rule 55 (idnest -> DOT ID idnest .)
+    GT              reduce using rule 55 (idnest -> DOT ID idnest .)
+    LE              reduce using rule 55 (idnest -> DOT ID idnest .)
+    RBRACE          reduce using rule 55 (idnest -> DOT ID idnest .)
+    RPAREN          reduce using rule 55 (idnest -> DOT ID idnest .)
+    COMMA           reduce using rule 55 (idnest -> DOT ID idnest .)
+    RBRACKET        reduce using rule 55 (idnest -> DOT ID idnest .)
+
+
+state 115
+
+    (16) funcHead -> FUNCTION LPAREN ID RPAREN ARROW returnType .
+
+    LBRACE          reduce using rule 16 (funcHead -> FUNCTION LPAREN ID RPAREN ARROW returnType .)
+
+
+state 116
+
+    (17) funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN . fParams RPAREN ARROW returnType
+    (19) funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN . RPAREN ARROW returnType
+    (63) fParams -> . ID COLON type arraySize COMMA fParams
+    (64) fParams -> .
+
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 131
+    ID              shift and go to state 120
+
+  ! RPAREN          [ reduce using rule 64 (fParams -> .) ]
+
+    fParams                        shift and go to state 132
+
+state 117
+
+    (9) memberFuncDecl -> FUNCTION ID COLON LPAREN . fParams RPAREN ARROW returnType
+    (11) memberFuncDecl -> FUNCTION ID COLON LPAREN . RPAREN ARROW returnType
+    (63) fParams -> . ID COLON type arraySize COMMA fParams
+    (64) fParams -> .
+
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 134
+    ID              shift and go to state 120
+
+  ! RPAREN          [ reduce using rule 64 (fParams -> .) ]
+
+    fParams                        shift and go to state 133
+
+state 118
+
+    (10) memberFuncDecl -> CONSTRUCTOR COLON LPAREN fParams . RPAREN
+
+    RPAREN          shift and go to state 135
+
+
+state 119
+
+    (12) memberFuncDecl -> CONSTRUCTOR COLON LPAREN RPAREN .
+
+    RBRACE          reduce using rule 12 (memberFuncDecl -> CONSTRUCTOR COLON LPAREN RPAREN .)
+    FUNCTION        reduce using rule 12 (memberFuncDecl -> CONSTRUCTOR COLON LPAREN RPAREN .)
+    CONSTRUCTOR     reduce using rule 12 (memberFuncDecl -> CONSTRUCTOR COLON LPAREN RPAREN .)
+    TYPE            reduce using rule 12 (memberFuncDecl -> CONSTRUCTOR COLON LPAREN RPAREN .)
+
+
+state 120
+
+    (63) fParams -> ID . COLON type arraySize COMMA fParams
+
+    COLON           shift and go to state 136
+
+
+state 121
+
+    (13) memberVarDecl -> TYPE ID COLON TYPE . SEMICOLON
+    (14) memberVarDecl -> TYPE ID COLON TYPE . LBRACKET INTLIT RBRACKET SEMICOLON
+
+    SEMICOLON       shift and go to state 137
+    LBRACKET        shift and go to state 138
+
+
+state 122
+
+    (40) relExpr -> arithExpr relOp arithExpr .
+
+    RBRACE          reduce using rule 40 (relExpr -> arithExpr relOp arithExpr .)
+    RPAREN          reduce using rule 40 (relExpr -> arithExpr relOp arithExpr .)
+    COMMA           reduce using rule 40 (relExpr -> arithExpr relOp arithExpr .)
+
+
+state 123
+
+    (41) arithExpr -> term addOp arithExpr .
+
+    EQ              reduce using rule 41 (arithExpr -> term addOp arithExpr .)
+    NEQ             reduce using rule 41 (arithExpr -> term addOp arithExpr .)
+    LT              reduce using rule 41 (arithExpr -> term addOp arithExpr .)
+    GT              reduce using rule 41 (arithExpr -> term addOp arithExpr .)
+    LE              reduce using rule 41 (arithExpr -> term addOp arithExpr .)
+    RBRACE          reduce using rule 41 (arithExpr -> term addOp arithExpr .)
+    RPAREN          reduce using rule 41 (arithExpr -> term addOp arithExpr .)
+    COMMA           reduce using rule 41 (arithExpr -> term addOp arithExpr .)
+    RBRACKET        reduce using rule 41 (arithExpr -> term addOp arithExpr .)
+
+
+state 124
+
+    (43) term -> factor multOp term .
+
+    ADD             reduce using rule 43 (term -> factor multOp term .)
+    SUB             reduce using rule 43 (term -> factor multOp term .)
+    EQ              reduce using rule 43 (term -> factor multOp term .)
+    NEQ             reduce using rule 43 (term -> factor multOp term .)
+    LT              reduce using rule 43 (term -> factor multOp term .)
+    GT              reduce using rule 43 (term -> factor multOp term .)
+    LE              reduce using rule 43 (term -> factor multOp term .)
+    RBRACE          reduce using rule 43 (term -> factor multOp term .)
+    RPAREN          reduce using rule 43 (term -> factor multOp term .)
+    COMMA           reduce using rule 43 (term -> factor multOp term .)
+    RBRACKET        reduce using rule 43 (term -> factor multOp term .)
+
+
+state 125
+
+    (49) factor -> LPAREN arithExpr RPAREN .
+
+    MULT            reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+    DIV             reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+    ADD             reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+    SUB             reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+    EQ              reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+    NEQ             reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+    LT              reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+    GT              reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+    LE              reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+    RBRACE          reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+    RPAREN          reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+    COMMA           reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+    RBRACKET        reduce using rule 49 (factor -> LPAREN arithExpr RPAREN .)
+
+
+state 126
+
+    (31) ifStat -> IF LPAREN relExpr RPAREN THEN . statBlock ELSE statBlock
+    (37) statBlock -> . LBRACE statement RBRACE
+
+    LBRACE          shift and go to state 128
+
+    statBlock                      shift and go to state 139
+
+state 127
+
+    (32) whileStat -> WHILE LPAREN relExpr RPAREN statBlock .
+
+    RBRACE          reduce using rule 32 (whileStat -> WHILE LPAREN relExpr RPAREN statBlock .)
+
+
+state 128
+
+    (37) statBlock -> LBRACE . statement RBRACE
+    (23) statement -> . assignStat
+    (24) statement -> . ifStat
+    (25) statement -> . whileStat
+    (26) statement -> . readStat
+    (27) statement -> . writeStat
+    (28) statement -> . returnStat
+    (29) statement -> . functionCall
+    (30) assignStat -> . variable assignOp expr
+    (31) ifStat -> . IF LPAREN relExpr RPAREN THEN statBlock ELSE statBlock
+    (32) whileStat -> . WHILE LPAREN relExpr RPAREN statBlock
+    (33) readStat -> . READ LPAREN variable RPAREN
+    (34) writeStat -> . WRITE LPAREN expr RPAREN
+    (35) returnStat -> . RETURN LPAREN expr RPAREN
+    (36) functionCall -> . ID LPAREN aParams RPAREN
+    (52) variable -> . ID idnest
+    (53) variable -> . ID idnest indice
+
+    IF              shift and go to state 23
+    WHILE           shift and go to state 24
+    READ            shift and go to state 25
+    WRITE           shift and go to state 26
+    RETURN          shift and go to state 27
+    ID              shift and go to state 28
+
+    statement                      shift and go to state 140
+    assignStat                     shift and go to state 15
+    ifStat                         shift and go to state 16
+    whileStat                      shift and go to state 17
+    readStat                       shift and go to state 18
+    writeStat                      shift and go to state 19
+    returnStat                     shift and go to state 20
+    functionCall                   shift and go to state 21
+    variable                       shift and go to state 22
+
+state 129
+
+    (65) aParams -> expr COMMA aParams .
+
+    RPAREN          reduce using rule 65 (aParams -> expr COMMA aParams .)
+
+
+state 130
+
+    (56) indice -> LBRACKET arithExpr RBRACKET .
+
+    EQ              reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+    MULT            reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+    DIV             reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+    ADD             reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+    SUB             reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+    NEQ             reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+    LT              reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+    GT              reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+    LE              reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+    RBRACE          reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+    RPAREN          reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+    COMMA           reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+    RBRACKET        reduce using rule 56 (indice -> LBRACKET arithExpr RBRACKET .)
+
+
+state 131
+
+    (19) funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN RPAREN . ARROW returnType
+
+    ARROW           shift and go to state 141
+
+
+state 132
+
+    (17) funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN fParams . RPAREN ARROW returnType
+
+    RPAREN          shift and go to state 142
+
+
+state 133
+
+    (9) memberFuncDecl -> FUNCTION ID COLON LPAREN fParams . RPAREN ARROW returnType
+
+    RPAREN          shift and go to state 143
+
+
+state 134
+
+    (11) memberFuncDecl -> FUNCTION ID COLON LPAREN RPAREN . ARROW returnType
+
+    ARROW           shift and go to state 144
+
+
+state 135
+
+    (10) memberFuncDecl -> CONSTRUCTOR COLON LPAREN fParams RPAREN .
+
+    RBRACE          reduce using rule 10 (memberFuncDecl -> CONSTRUCTOR COLON LPAREN fParams RPAREN .)
+    FUNCTION        reduce using rule 10 (memberFuncDecl -> CONSTRUCTOR COLON LPAREN fParams RPAREN .)
+    CONSTRUCTOR     reduce using rule 10 (memberFuncDecl -> CONSTRUCTOR COLON LPAREN fParams RPAREN .)
+    TYPE            reduce using rule 10 (memberFuncDecl -> CONSTRUCTOR COLON LPAREN fParams RPAREN .)
+
+
+state 136
+
+    (63) fParams -> ID COLON . type arraySize COMMA fParams
+    (59) type -> . TYPE
+    (60) type -> . VOID
+
+    TYPE            shift and go to state 87
+    VOID            shift and go to state 146
+
+    type                           shift and go to state 145
+
+state 137
+
+    (13) memberVarDecl -> TYPE ID COLON TYPE SEMICOLON .
+
+    RBRACE          reduce using rule 13 (memberVarDecl -> TYPE ID COLON TYPE SEMICOLON .)
+    FUNCTION        reduce using rule 13 (memberVarDecl -> TYPE ID COLON TYPE SEMICOLON .)
+    CONSTRUCTOR     reduce using rule 13 (memberVarDecl -> TYPE ID COLON TYPE SEMICOLON .)
+    TYPE            reduce using rule 13 (memberVarDecl -> TYPE ID COLON TYPE SEMICOLON .)
+
+
+state 138
+
+    (14) memberVarDecl -> TYPE ID COLON TYPE LBRACKET . INTLIT RBRACKET SEMICOLON
+
+    INTLIT          shift and go to state 147
+
+
+state 139
+
+    (31) ifStat -> IF LPAREN relExpr RPAREN THEN statBlock . ELSE statBlock
+
+    ELSE            shift and go to state 148
+
+
+state 140
+
+    (37) statBlock -> LBRACE statement . RBRACE
+
+    RBRACE          shift and go to state 149
+
+
+state 141
+
+    (19) funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN RPAREN ARROW . returnType
+    (61) returnType -> . type
+    (62) returnType -> . VOID
+    (59) type -> . TYPE
+    (60) type -> . VOID
+
+    VOID            shift and go to state 86
+    TYPE            shift and go to state 87
+
+    returnType                     shift and go to state 150
+    type                           shift and go to state 85
+
+state 142
+
+    (17) funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN fParams RPAREN . ARROW returnType
+
+    ARROW           shift and go to state 151
+
+
+state 143
+
+    (9) memberFuncDecl -> FUNCTION ID COLON LPAREN fParams RPAREN . ARROW returnType
+
+    ARROW           shift and go to state 152
+
+
+state 144
+
+    (11) memberFuncDecl -> FUNCTION ID COLON LPAREN RPAREN ARROW . returnType
+    (61) returnType -> . type
+    (62) returnType -> . VOID
+    (59) type -> . TYPE
+    (60) type -> . VOID
+
+    VOID            shift and go to state 86
+    TYPE            shift and go to state 87
+
+    returnType                     shift and go to state 153
+    type                           shift and go to state 85
+
+state 145
+
+    (63) fParams -> ID COLON type . arraySize COMMA fParams
+    (57) arraySize -> . LBRACKET INTLIT RBRACKET
+    (58) arraySize -> . LBRACKET RBRACKET
+
+    LBRACKET        shift and go to state 155
+
+    arraySize                      shift and go to state 154
+
+state 146
+
+    (60) type -> VOID .
+
+    LBRACKET        reduce using rule 60 (type -> VOID .)
+
+
+state 147
+
+    (14) memberVarDecl -> TYPE ID COLON TYPE LBRACKET INTLIT . RBRACKET SEMICOLON
+
+    RBRACKET        shift and go to state 156
+
+
+state 148
+
+    (31) ifStat -> IF LPAREN relExpr RPAREN THEN statBlock ELSE . statBlock
+    (37) statBlock -> . LBRACE statement RBRACE
+
+    LBRACE          shift and go to state 128
+
+    statBlock                      shift and go to state 157
+
+state 149
+
+    (37) statBlock -> LBRACE statement RBRACE .
+
+    RBRACE          reduce using rule 37 (statBlock -> LBRACE statement RBRACE .)
+    ELSE            reduce using rule 37 (statBlock -> LBRACE statement RBRACE .)
+
+
+state 150
+
+    (19) funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN RPAREN ARROW returnType .
+
+    LBRACE          reduce using rule 19 (funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN RPAREN ARROW returnType .)
+
+
+state 151
+
+    (17) funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN fParams RPAREN ARROW . returnType
+    (61) returnType -> . type
+    (62) returnType -> . VOID
+    (59) type -> . TYPE
+    (60) type -> . VOID
+
+    VOID            shift and go to state 86
+    TYPE            shift and go to state 87
+
+    returnType                     shift and go to state 158
+    type                           shift and go to state 85
+
+state 152
+
+    (9) memberFuncDecl -> FUNCTION ID COLON LPAREN fParams RPAREN ARROW . returnType
+    (61) returnType -> . type
+    (62) returnType -> . VOID
+    (59) type -> . TYPE
+    (60) type -> . VOID
+
+    VOID            shift and go to state 86
+    TYPE            shift and go to state 87
+
+    returnType                     shift and go to state 159
+    type                           shift and go to state 85
+
+state 153
+
+    (11) memberFuncDecl -> FUNCTION ID COLON LPAREN RPAREN ARROW returnType .
+
+    RBRACE          reduce using rule 11 (memberFuncDecl -> FUNCTION ID COLON LPAREN RPAREN ARROW returnType .)
+    FUNCTION        reduce using rule 11 (memberFuncDecl -> FUNCTION ID COLON LPAREN RPAREN ARROW returnType .)
+    CONSTRUCTOR     reduce using rule 11 (memberFuncDecl -> FUNCTION ID COLON LPAREN RPAREN ARROW returnType .)
+    TYPE            reduce using rule 11 (memberFuncDecl -> FUNCTION ID COLON LPAREN RPAREN ARROW returnType .)
+
+
+state 154
+
+    (63) fParams -> ID COLON type arraySize . COMMA fParams
+
+    COMMA           shift and go to state 160
+
+
+state 155
+
+    (57) arraySize -> LBRACKET . INTLIT RBRACKET
+    (58) arraySize -> LBRACKET . RBRACKET
+
+    INTLIT          shift and go to state 161
+    RBRACKET        shift and go to state 162
+
+
+state 156
+
+    (14) memberVarDecl -> TYPE ID COLON TYPE LBRACKET INTLIT RBRACKET . SEMICOLON
+
+    SEMICOLON       shift and go to state 163
+
+
+state 157
+
+    (31) ifStat -> IF LPAREN relExpr RPAREN THEN statBlock ELSE statBlock .
+
+    RBRACE          reduce using rule 31 (ifStat -> IF LPAREN relExpr RPAREN THEN statBlock ELSE statBlock .)
+
+
+state 158
+
+    (17) funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN fParams RPAREN ARROW returnType .
+
+    LBRACE          reduce using rule 17 (funcHead -> FUNCTION LPAREN ID construct RPAREN LPAREN fParams RPAREN ARROW returnType .)
+
+
+state 159
+
+    (9) memberFuncDecl -> FUNCTION ID COLON LPAREN fParams RPAREN ARROW returnType .
+
+    RBRACE          reduce using rule 9 (memberFuncDecl -> FUNCTION ID COLON LPAREN fParams RPAREN ARROW returnType .)
+    FUNCTION        reduce using rule 9 (memberFuncDecl -> FUNCTION ID COLON LPAREN fParams RPAREN ARROW returnType .)
+    CONSTRUCTOR     reduce using rule 9 (memberFuncDecl -> FUNCTION ID COLON LPAREN fParams RPAREN ARROW returnType .)
+    TYPE            reduce using rule 9 (memberFuncDecl -> FUNCTION ID COLON LPAREN fParams RPAREN ARROW returnType .)
+
+
+state 160
+
+    (63) fParams -> ID COLON type arraySize COMMA . fParams
+    (63) fParams -> . ID COLON type arraySize COMMA fParams
+    (64) fParams -> .
+
+    ID              shift and go to state 120
+    RPAREN          reduce using rule 64 (fParams -> .)
+
+    fParams                        shift and go to state 164
+
+state 161
+
+    (57) arraySize -> LBRACKET INTLIT . RBRACKET
+
+    RBRACKET        shift and go to state 165
+
+
+state 162
+
+    (58) arraySize -> LBRACKET RBRACKET .
+
+    COMMA           reduce using rule 58 (arraySize -> LBRACKET RBRACKET .)
+
+
+state 163
+
+    (14) memberVarDecl -> TYPE ID COLON TYPE LBRACKET INTLIT RBRACKET SEMICOLON .
+
+    RBRACE          reduce using rule 14 (memberVarDecl -> TYPE ID COLON TYPE LBRACKET INTLIT RBRACKET SEMICOLON .)
+    FUNCTION        reduce using rule 14 (memberVarDecl -> TYPE ID COLON TYPE LBRACKET INTLIT RBRACKET SEMICOLON .)
+    CONSTRUCTOR     reduce using rule 14 (memberVarDecl -> TYPE ID COLON TYPE LBRACKET INTLIT RBRACKET SEMICOLON .)
+    TYPE            reduce using rule 14 (memberVarDecl -> TYPE ID COLON TYPE LBRACKET INTLIT RBRACKET SEMICOLON .)
+
+
+state 164
+
+    (63) fParams -> ID COLON type arraySize COMMA fParams .
+
+    RPAREN          reduce using rule 63 (fParams -> ID COLON type arraySize COMMA fParams .)
+
+
+state 165
+
+    (57) arraySize -> LBRACKET INTLIT RBRACKET .
+
+    COMMA           reduce using rule 57 (arraySize -> LBRACKET INTLIT RBRACKET .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for RPAREN in state 29 resolved as shift
+WARNING: shift/reduce conflict for FUNCTION in state 52 resolved as shift
+WARNING: shift/reduce conflict for CONSTRUCTOR in state 52 resolved as shift
+WARNING: shift/reduce conflict for TYPE in state 52 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 89 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 116 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 117 resolved as shift
+WARNING: reduce/reduce conflict in state 86 resolved using rule (type -> VOID)
+WARNING: rejected rule (returnType -> VOID) in state 86
+WARNING: Rule (returnType -> VOID) is never reduced
